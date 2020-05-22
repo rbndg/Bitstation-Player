@@ -1,0 +1,162 @@
+body {
+  padding: 25px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background: #040409;
+  color:#DAD2D8;
+}
+
+
+
+input{
+  outline:none;
+}
+
+
+.title-wrapper h3 a{
+  color:#ccf445;
+  text-decoration:none;
+}
+
+.status-block{
+  display: flex;
+  justify-content: center;
+  padding-top: 25px;
+  flex-direction: column;
+  width: 500px;
+  align-items: center;
+  margin: 0 auto;
+}
+
+#error{
+  font-size: 14px;
+  color:#ff9a00;
+  margin-bottom: 20px;
+}
+
+.video-block figure{
+  margin: 0 auto;
+  width: 700px;
+  padding: 0px;
+}
+.video-block video {
+  outline:none;
+  width: 100%;
+  box-shadow: 0px 0px 10000px #232323;
+}
+
+
+.station-key{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.station-key textarea{
+  height: 2em;
+  width: 500px;
+  height: 50px;
+  font-size: 1.5em;
+  background-color: #1B2A41;
+  color:#FFFFFC;
+  border: 1px solid #000022;
+  font-family: monospace;
+}
+
+.station-key button{
+  margin-top: 50px;
+  padding: 20px;
+  background-color: #143642;
+  color:white;
+  border:none;
+  font-size: 2em;
+  border-radius: 50px;;
+}
+
+
+
+.menu{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.buttonRow{
+  width: 200px;
+  padding: 10px;
+  background-color: #143642;
+  color:white;
+  border:none;
+  font-size: 14px;
+  border-radius: 50px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.buy-item{
+  color:white;
+  text-decoration: none;
+}
+
+
+.invoice{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.invoice img{
+  width:300px;
+  margin-bottom: 50px;
+}
+
+.invoice code{
+  background: #1B2A41;
+  color: white;
+  width: 350px;
+  word-break: break-word;
+  padding: 20px;
+}
+
+.invoice-header{
+  text-align: center;
+  margin-top:40px;
+  margin-bottom:40px;
+}
+
+.invoice-header span.sats{
+  color:#fcc728;
+  border-bottom:2px solid #f78e7d;
+  margin-left:10px;
+}
+
+.invoice-header span.minutes{
+  color:#f78e7d;
+  border-bottom: 2px solid #fcc728;
+}
+
+.status-block{
+
+}
+
+#status{
+  font-size: 18px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+}
+
+#isValid[valid='true']{
+  width: 10px;
+  height: 10px;
+  background: #ccf445;
+  border-radius: 1000px;
+  box-shadow: 0px 0px 10px #ccf445;
+  margin-right: 10px;
+}
+
+#isValid[valid='false']{
+  width: 10px;
+  height: 10px;
+  background: red;
+  border-radius: 1000px;
+}

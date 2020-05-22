@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  .menu
+    each time in amounts
+      div.buttonRow
+        a.buy-item(href="/buy?minutes="+time) 
+          div Buy #{time} minutes. 
+          div #{time * cost} Satoshis

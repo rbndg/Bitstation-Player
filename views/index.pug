@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  br
+  br
+  form.station-key(action="/connect" method="post")
+    textarea(placeholder="Enter Station Key" name="stationKey")
+    button ▶ Play

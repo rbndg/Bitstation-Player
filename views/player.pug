@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  .video-block
+    figure.video-fig
+      video(controls=true, id="video")
+  .status-block
+    #error
+    #status
+      #isValid
+      #timeLeft
+  script(src="/javascripts/player.js")
+  
+  

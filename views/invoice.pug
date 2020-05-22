@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h2.invoice-header
+    | Invoice for 
+    span.minutes #{minutes} minutes 
+    | of streaming video for
+    span.sats #{sats} Satoshis
+  .invoice
+    img(src=b64)
+    code #{invoice}
+  script(src="/javascripts/invoice-polling.js")
