@@ -32,7 +32,7 @@ function start () {
       .then(result => result.json())
       .then(result => {
         if (result.valid) {
-          document.getElementById('isValid').setAttribute('valid',result.valid)
+          document.getElementById('isValid').setAttribute('valid', result.valid)
           document.getElementById('timeLeft').innerText = Math.floor(result.status.remaining / 1000) + ' Seconds left'
         }
       })
