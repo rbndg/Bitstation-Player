@@ -2,7 +2,7 @@
 const client = require('bitstation-client')
 
 class DzManager {
-  constructor (config) {
+  constructor () {
     this.started = false
     this.config = {}
     this.currentData = {}
