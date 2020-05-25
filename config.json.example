@@ -1,0 +1,5 @@
+{
+  "HLS_SERVER": "http://localhost:8021",
+  "STREAM_COST": 10,
+  "MENU": [1, 10, 60, 90, 120]
+}

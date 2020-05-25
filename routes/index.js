@@ -3,6 +3,7 @@ const express = require('express')
 const router = express.Router()
 const client = require('bitstation-client')
 const QRCode = require('qrcode')
+const config = require('../config.json')
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -21,13 +22,6 @@ router.get('/player', function (req, res, next) {
   }
   res.redirect('/')
 })
-
-const config = {
-  STATION_KEY: null,
-  HLS_SERVER: new (require('url').URL)('http://localhost:8021'),
-  STREAM_COST: 10,
-  MENU: [1, 10, 60, 90, 120]
-}
 
 router.post('/connect', function (req, res, next) {
   config.STATION_KEY = req.body.stationKey
@@ -55,7 +49,6 @@ router.post('/connect', function (req, res, next) {
 })
 
 router.get('/menu', function (req, res, next) {
-
   res.render('menu', {
     cost: config.STREAM_COST,
     stationKey: config.STATION_KEY,
@@ -64,7 +57,6 @@ router.get('/menu', function (req, res, next) {
 })
 
 router.get('/buy', function (req, res, next) {
-
   const { minutes } = req.query
   if (!minutes || !dz.dazaar) {
     return res.redirect('/')

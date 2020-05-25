@@ -1,6 +1,6 @@
 # Bitstation Player
 
-A simple video player for Bitstation
+A simple video player for Bitstation streams
 
 ## Features
 * Purchase a video stream
