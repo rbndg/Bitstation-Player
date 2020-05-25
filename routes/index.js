@@ -1,11 +1,12 @@
 'use strict'
 const express = require('express')
 const router = express.Router()
-const client = require('bitstation-client')
 const QRCode = require('qrcode')
 const config = require('../config.json')
+const DzManager = require('./DzManager')
 
-/* GET home page. */
+const dz = new DzManager(config)
+
 router.get('/', function (req, res, next) {
   res.render('index', {
     title: 'Bit'
@@ -82,65 +83,5 @@ router.get('/valid-stream', function (req, res, next) {
 router.get('/stream-status', function (req, res, next) {
   res.send({ valid: dz.streamIsValid, status: dz.currentData })
 })
-
-class DzManager {
-  constructor () {
-    this.started = false
-    this.config = {}
-    this.currentData = {}
-  }
-
-  destroy () {
-    this.dazaar._marketFile.destroy()
-    this.dazaar.buyer.destroy()
-  }
-
-  start (config) {
-    this.started = false
-    const Dazzar = client.dazaar
-    this.config = config
-    const dazaar = new Dazzar(config)
-    this.startHLS()
-    dazaar.on('stream-validate', () => {
-      this.streamIsValid = true
-    })
-
-    dazaar.on('stream-feed', () => {
-      dazaar.buyer.feed.update(() => {
-        dazaar.startStream({})
-      })
-    })
-
-    dazaar.on('stream-data', (data) => {
-      this.hls.appendData(data)
-    })
-
-    dazaar.on('stream-valid', (data) => {
-      this.currentData = data
-    })
-
-    dazaar.on('stream-invalid', () => {
-      this.streamIsValid = false
-    })
-    this.dazaar = dazaar
-  }
-
-  buy (amt) {
-    const sats = this.dazaar.getMenuAmount(+amt)
-    this.dazaar.buy(sats)
-    return sats
-  }
-
-  startHLS () {
-    const HLS = client.hlsGen
-    const hls = new HLS(config)
-    hls.init((err) => {
-      if (err) throw err
-    })
-    hls.startHLS()
-    this.hls = hls
-  }
-}
-const dz = new DzManager(config)
 
 module.exports = router
