@@ -4,7 +4,6 @@ const router = express.Router()
 const QRCode = require('qrcode')
 const config = require('../config.json')
 const DzManager = require('./DzManager')
-
 const dz = new DzManager(config)
 
 router.get('/', function (req, res, next) {

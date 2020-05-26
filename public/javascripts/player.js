@@ -27,7 +27,7 @@ if (Hls.isSupported()) {
 }
 
 function start () {
-  const timer = setInterval(() => {
+  var timer = setInterval(() => {
     fetch('/stream-status')
       .then(result => result.json())
       .then(result => {
