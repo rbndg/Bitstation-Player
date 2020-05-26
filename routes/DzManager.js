@@ -1,5 +1,6 @@
 'use strict'
 const client = require('bitstation-client')
+const { Dazaar, HLSGen } = client
 
 class DzManager {
   constructor () {
@@ -13,11 +14,11 @@ class DzManager {
     this.dazaar.buyer.destroy()
   }
 
-  start (config) {
+  setDz (config) {
     this.started = false
-    const Dazzar = client.dazaar
     this.config = config
-    const dazaar = new Dazzar(config)
+    this.dazaar = new Dazaar(config)
+    const dazaar = this.dazaar
     this.startHLS()
     dazaar.on('stream-validate', () => {
       this.streamIsValid = true
@@ -40,7 +41,10 @@ class DzManager {
     dazaar.on('stream-invalid', () => {
       this.streamIsValid = false
     })
-    this.dazaar = dazaar
+  }
+
+  start () {
+    this.dazaar.start()
   }
 
   buy (amt) {
@@ -50,8 +54,7 @@ class DzManager {
   }
 
   startHLS () {
-    const HLS = client.hlsGen
-    const hls = new HLS(this.config)
+    const hls = new HLSGen(this.config)
     hls.init((err) => {
       if (err) throw err
     })

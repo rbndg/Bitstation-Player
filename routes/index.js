@@ -4,11 +4,12 @@ const router = express.Router()
 const QRCode = require('qrcode')
 const config = require('../config.json')
 const DzManager = require('./DzManager')
-const dz = new DzManager(config)
+const dz = new DzManager()
+config.HLS_SERVER = new (require('url').URL)(config.HLS_SERVER)
 
 router.get('/', function (req, res, next) {
   res.render('index', {
-    title: 'Bit'
+    title: 'Bitstation Player'
   })
 })
 
@@ -16,9 +17,7 @@ router.get('/player', function (req, res, next) {
   if (!dz) return res.send('/')
 
   if (dz.streamIsValid) {
-    return res.render('player', {
-      videoSrc: 'asdasdasds'
-    })
+    return res.render('player', {})
   }
   res.redirect('/')
 })
@@ -27,7 +26,6 @@ router.post('/connect', function (req, res, next) {
   config.STATION_KEY = req.body.stationKey
 
   if (config.STATION_KEY !== dz.config.STATION_KEY) {
-    dz.start(config)
 
     const handler = (path) => {
       res.redirect(path)
@@ -36,11 +34,12 @@ router.post('/connect', function (req, res, next) {
     }
     const invalidFn = handler.bind(this, '/menu')
     const validFn = handler.bind(this, '/player')
+    dz.setDz(config)
     dz.dazaar.once('stream-validate', validFn)
     dz.dazaar.once('stream-invalid', invalidFn)
+    dz.start(config)
     return
   }
-
   if (dz.streamIsValid) {
     return res.redirect('/player')
   } else {
